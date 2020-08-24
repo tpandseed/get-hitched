@@ -38,6 +38,8 @@
 				<script>const user = netlifyIdentity.currentUser();
 console.log(user);
 
+netlifyIdentity.on('init', user => console.log('init', user));
+
 function userStuff() {
 	return {
     	show: true,
