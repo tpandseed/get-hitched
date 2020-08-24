@@ -32,20 +32,19 @@
         </nav>
         <div data-netlify-identity-button></div>
         <div x-data="userStuff()">
-            <span x-text="name"></span>
+            <div x-show="name">Hi, <span x-text="name"></span>!</div>
         </div>
-        <span x-data="{message:'yo'}" x-text="message"></span>
     </div>
 </header></div>
-				<script>const user = netlifyIdentity.currentUser();
-console.log(user);
+				<script>var user = netlifyIdentity.currentUser();
 
-netlifyIdentity.on('init', user => console.log('init', user));
+netlifyIdentity.on('init', u => user = u);
+netlifyIdentity.on('login', u => user = u);
 
 function userStuff() {
 	return {
     	show: true,
-        name: "test"
+        name: user.user_metadata.full_name
     }
 }</script>
 			</div>
