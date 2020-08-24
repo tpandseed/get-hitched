@@ -43,8 +43,8 @@ netlifyIdentity.on('login', u => user = u);
 
 function userStuff() {
 	return {
-    	show: true,
-        name: user.user_metadata.full_name
+    	show: this.name != undefined,
+        name: user?.user_metadata?.full_name
     }
 }</script>
 			</div>
