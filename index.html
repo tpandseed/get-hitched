@@ -29,10 +29,21 @@
                     </li>
             </ul>
         </nav>
-        <div data-netlify-identity-button>Login</div>
+        <div data-netlify-identity-button></div>
+        <div x-data="userStuff()">
+            <span x-text="name"></span>
+        </div>
     </div>
 </header></div>
-				<script></script>
+				<script>const user = netlifyIdentity.currentUser();
+console.log(user);
+
+function userStuff() {
+	return {
+    	show: true,
+        name: "test"
+    }
+}</script>
 			</div>
 		</div>
 	</div>
