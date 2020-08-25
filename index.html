@@ -20,34 +20,27 @@
 	<div class="columns flex flex-wrap ">
 		<div class="column w-full" id="column-cog9l">
 			<div class="primo-component">
-				<div id="component-crj3r" class="w-full"><header class="w-full bg-gray-100 font-bold py-8">
+				<div id="component-mzjyr" class="w-full"><header class="w-full bg-gray-100 font-bold py-8">
     <div class="container flex justify-between items-center">
         <a href="/" class="text-3xl">Syd & Tirth 4eva</a>
-        <nav>
-        	<ul class="flex">
-            	
-                	<li class="mr-2">
-                    	<a href='/rsvp.html'>RSVP</a>
-                    </li>
-                
-            </ul>
-        </nav>
         <div data-netlify-identity-button></div>
-        <div x-data="userStuff()" @user-login.window="name = $event.detail">
-            <div x-show="name">Hey <span x-text="name"></span>!</div>
-        </div>
+        <div x-data="{ name: '' }" @user-login.window="name = $event.detail">
+            <div x-show="name">
+            	Hi, <span x-text="name"></span>!
+
+         		<nav>
+        			<ul class="flex">
+            			
+                			<li class="mr-2">
+                    			<a href='/rsvp.html'>RSVP</a>
+                    		</li>
+                		
+            		</ul>
+        		</nav>
+            </div>
     </div>
 </header></div>
-				<script>var user = netlifyIdentity.currentUser();
-
-netlifyIdentity.on('init', u => { if (u) window.dispatchEvent(new CustomEvent('user-login', {detail: u.user_metadata.full_name})); });
-netlifyIdentity.on('login', u => { if (u) window.dispatchEvent(new CustomEvent('user-login', {detail: u.user_metadata.full_name})); });
-
-function userStuff() {
-	return {
-        name: ''
-    }
-}</script>
+				<script></script>
 			</div>
 		</div>
 	</div>
@@ -61,7 +54,7 @@ function userStuff() {
 		</div>
 		<div class="column w-full md:w-1/2 md:pl-3" id="column-zolti">
 			<div class="primo-content">
-				<p><br><br><br></p><p>Fun picture here maybe? A</p>
+				<p><br><br><br></p><p>Fun picture here maybe?</p>
 			</div>
 		</div>
 	</div>
