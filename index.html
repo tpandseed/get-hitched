@@ -21,36 +21,22 @@
 				<div id="component-crj3r" class="w-full"><header class="w-full bg-gray-100 font-bold py-8">
     <div class="container flex justify-between items-center">
         <a href="/" class="text-3xl">Syd & Tirth 4eva</a>
-        <div data-netlify-identity-button></div>
-        
-        <div x-data="{ name: '' }" @user-login.window="name = $event.detail">
-            <div x-show="name">
-            	Hi, <span x-text="name"></span>!
+        <nav>
+        	<ul class="flex">
+            	
+                	<li class="mr-2">
+                    	<a href='/rsvp.html'></a>
+                    </li>
                 
-                <nav>
-                    <ul class="flex">
-                            <li class="mr-2">
-                                <a href='/rsvp.html'>RSVP</a>
-                            </li>
-                            <li class="mr-2">
-                                <a href='/logistics.html'>Logistics</a>
-                            </li>
-                    </ul>
-                </nav>
-            </div>
+            </ul>
+        </nav>
+        <div data-netlify-identity-button></div>
+        <div x-data="userStuff()" @user-login.window="name = $event.detail">
+            <div x-show="name">Hi, <span x-text="name"></span>!</div>
         </div>
     </div>
 </header></div>
-				<script>var user = netlifyIdentity.currentUser();
-
-netlifyIdentity.on('init', u => { if (u) window.dispatchEvent(new CustomEvent('user-login', {detail: u.user_metadata.full_name})); });
-netlifyIdentity.on('login', u => { if (u) window.dispatchEvent(new CustomEvent('user-login', {detail: u.user_metadata.full_name})); });
-
-function userStuff() {
-	return {
-        name: ''
-    }
-}</script>
+				<script></script>
 			</div>
 		</div>
 	</div>
