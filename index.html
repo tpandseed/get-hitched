@@ -9,8 +9,10 @@
       <link rel="stylesheet" type="text/css" href="./index.css" />
       <script src="./index.js"></script>
       
-      <title>Syd & Tirth Get Hitched!</title>
+      <title>Syd &amp; Tirth Get Hitched!</title>
 <meta name="description" content="">
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.6.0/dist/alpine.min.js" defer></script>
+<script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     </head>
 
     <body data-instant-intensity="all" class="primo-page">   
@@ -21,22 +23,33 @@
 				<div id="component-crj3r" class="w-full"><header class="w-full bg-gray-100 font-bold py-8">
     <div class="container flex justify-between items-center">
         <a href="/" class="text-3xl">Syd & Tirth 4eva</a>
-        <nav>
-        	<ul class="flex">
-            	
-                	<li class="mr-2">
-                    	<a href='/rsvp.html'></a>
-                    </li>
-                
-            </ul>
-        </nav>
-        <div data-netlify-identity-button></div>
-        <div x-data="userStuff()" @user-login.window="name = $event.detail">
-            <div x-show="name">Hi, <span x-text="name"></span>!</div>
-        </div>
+        <div x-data="{ name: '' }" @user-login.window="name = $event.detail">
+            <div x-show="name">
+            	Hi, <span x-text="name"></span>!
+
+                <nav>
+                    <ul class="flex">
+                            <li class="mr-2">
+                                <a href='/rsvp.html.html'>RSVP</a>
+                            </li>
+                            <li class="mr-2">
+                                <a href='/logistics.html.html'>Logistics</a>
+                            </li>
+                    </ul>
+                </nav>
+            </div>
     </div>
 </header></div>
-				<script></script>
+				<script>var user = netlifyIdentity.currentUser();
+
+netlifyIdentity.on('init', u => { if (u) window.dispatchEvent(new CustomEvent('user-login', {detail: u.user_metadata.full_name})); });
+netlifyIdentity.on('login', u => { if (u) window.dispatchEvent(new CustomEvent('user-login', {detail: u.user_metadata.full_name})); });
+
+function userStuff() {
+	return {
+        name: ''
+    }
+}</script>
 			</div>
 		</div>
 	</div>
