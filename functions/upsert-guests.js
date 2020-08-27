@@ -9,12 +9,27 @@ function multiUpsert(guests) {
         guests,
         q.Lambda(
             ['guest'],
-            q.If(q.Exists(q.Match(q.Index('name'), q.Select(['data', 'name'], q.Var('guest')))),
-                q.Replace(q.Select('ref', q.Get(q.Match(q.Index('name'), q.Select(['data', 'name'], q.Var('guest'))))), q.Var('guest')),
-                q.Create(q.Collection('guests'), q.Var('guest'))
+            q.If(q.Exists(q.Match(q.Index('name'), q.Select('name', q.Var('guest')))),
+                q.Replace(q.Select('ref', q.Get(q.Match(q.Index('name'), q.Select('name', q.Var('guest'))))), { data: q.Var('guest') }),
+                q.Create(q.Collection('guests'), { data: q.Var('guest') } )
             )
         )
     );
+}
+
+function upsert(guest) {
+    return q.If(
+        q.Exists(q.Match(q.Index('name'), guest.name)),
+        q.Replace(
+            q.Select('ref', q.Get(q.Match(q.Index('name'), guest.name))),
+            {
+                guest
+            }
+        ),
+        q.Create(q.Collection('guests'), {
+            data: guest
+        })
+    )
 }
 
 exports.handler = async (event, context) => {
@@ -27,11 +42,12 @@ exports.handler = async (event, context) => {
     console.log(`Function 'upsert-guests' invoked for ${guests.length} guests`);
 
     try {
-        let query = await client.query(multiUpsert(guests));
+        const query = await client.query(multiUpsert(guests));
+        // console.log(query);
 
         return {
             statusCode: 200,
-            body: query
+            body: ''
         };
     } catch (error) {
         return {

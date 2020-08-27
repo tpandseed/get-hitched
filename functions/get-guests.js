@@ -13,19 +13,21 @@ exports.handler = async (event, context) => {
 
     try {
         let query = await client.query(
-            q.Paginate(q.Match(q.Index('names')))
+            q.Paginate(q.Match(q.Index('all_guests')))
           );
 
-        console.log(query);
+        let getAllQuery = query.data.map(ref => q.Get(ref));
+
+        let allData = await client.query(getAllQuery)
 
         return {
             statusCode: 200,
-            body: 'hey'
+            body: JSON.stringify(allData)
         };
     } catch (error) {
         return {
             statusCode: 400,
-            body: error
+            body: error.toString()
         };
     }
 }

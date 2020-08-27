@@ -97,6 +97,18 @@ function stuff() {
         submitted: false,
         downloadCsv() {
 
+            fetch('/.netlify/functions/get-guests', {
+                method: 'POST', body: ''
+            })
+                .then(res => {
+                    if (!res.ok){
+                        console.error("couldn't get all data");
+                    } else {
+                        res.json().then(data => {
+                            console.log(data);
+                        })
+                    }
+                })
         }
     }
 }
