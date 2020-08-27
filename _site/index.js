@@ -2,7 +2,7 @@ const zeroDay = new Date('2020-09-15T16:20:00');
 
 function userEvent(userObj) {
     // console.log('user event', userObj);
-    window.dispatchEvent(new CustomEvent('user-login', { detail: userObj })); 
+    window.dispatchEvent(new CustomEvent('user-login', { detail: userObj }));
 }
 
 netlifyIdentity.on('init', u => userEvent(u));
@@ -44,8 +44,7 @@ function stuff() {
         },
         addGuest() {
 
-            if (!this.currentGuest.name)
-            {
+            if (!this.currentGuest.name) {
                 console.log('clicked with no input');
                 return;
             }
@@ -54,7 +53,7 @@ function stuff() {
 
             this.guests.push(Object.assign({}, this.currentGuest));
 
-            this.currentGuest =  {
+            this.currentGuest = {
                 name: '',
                 stayingOver: '',
                 bubble: '',
@@ -68,9 +67,25 @@ function stuff() {
             this.guests = this.guests.filter(g => g !== guest);
         },
         submit() {
-            console.log(this.guests);
-            this.guests.forEach(element => {
-                console.log(element.name);
+            this.guests.forEach(guest => {
+
+                fetch('/.netlify/functions/upsert-guest', {
+                    method: 'POST', body: JSON.stringify({
+                        name: guest.name,
+                        stayingOver: guest.stayingOver,
+                        bubble: guest.bubble,
+                        dietary: guest.dietary,
+                        wine: guest.wine,
+                        booze: guest.booze,
+                        notes: guest.notes
+                    })
+                })
+                    .then(res => {
+                        if (!res.ok) {
+                            console.error("couldn't save guest");
+                        }
+                    });
+
             });
         }
     }
