@@ -2,211 +2,68 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <title>Syd + Tirth</title>
-  <meta name="description" content="Syd and Tirth get hitched!">
+    <title>Syd + Tirth</title>
+    <meta name="description" content="Syd and Tirth get hitched!">
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.9/fullpage.min.css"
-    integrity="sha512-8M8By+q+SldLyFJbybaHoAPD6g07xyOcscIOQEypDzBS+sTde5d6mlK2ANIZPnSyxZUqJfCNuaIvjBUi8/RS0w=="
-    crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <link rel="stylesheet" href="style.css">
 
-  <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.6.0/dist/alpine.min.js" defer></script>
 
-  <style>
-    .section {
-      text-align: center;
-    }
-
-    .section {
-      background-size: cover;
-    }
-
-    .slide {
-      background-size: cover;
-    }
-
-    #section_main {
-      background-image: url(img/clink.jpg);
-    }
-  </style>
-
-  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.6.0/dist/alpine.min.js" defer></script>
-
-  <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  <script src="./index.js"></script>
+    <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script src="./index.js"></script>
 </head>
 
 <body x-data="stuff()" @user-login.window="setUser($event.detail)">
 
-  <!-- <ul x-show="user" id="menu">
-    <li data-menuanchor="main" class="active"><a href="#main">Main</a></li>
-    <li data-menuanchor="logistics"><a href="#logistics">Logistics</a></li>
-    <li data-menuanchor="rsvp"><a href="#rsvp">RSVP</a></li>
-  </ul> -->
+    <div class="relative bg-white overflow-hidden">
+        <div class="max-w-screen-xl mx-auto">
+            <div class="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
+                
+                <div class="relative pt-6 px-4 sm:px-6 lg:px-8">
+                    <nav class="relative flex items-center justify-between sm:h-10 lg:justify-start">
+                        <div data-netlify-identity-button></div>
+                    </nav>
+                </div>
 
-  <div id="fullpage">
-    <div class="section active" id="section_main">
-      <div class="container mx-auto px-4">
-        <p class="text-5xl">Syd and Tirth Are Getting Married!</p>
-        <div data-netlify-identity-button></div>
-        <p x-show="user">Hi, <span x-text="user?.user_metadata.full_name"></span>!</p>
-        <p>Scroll down for info</p>
-      </div>
-    </div>
-
-    <div class="section" id="section_logistics">
-      <div x-show="!user" class="container mx-auto px-4">
-        <p>Please log in</p>
-      </div>
-      <div x-show="user" class="container mx-auto px-4">
-        <div class="grid grid-cols-2 gap-4">
-          <div>
-            <p class="text-lg">September 15th, 2020</p>
-          </div>
-          <div>
-            <p class="text-lg">Milford, Prince Edward County</p>
-          </div>
+                <main class="mt-10 mx-auto max-w-screen-xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
+                    <div class="sm:text-center lg:text-left">
+                        <h3 class="text-xl font-bold text-gray-600 mb-2">Hey <span x-text="userDisplay()"></span>,</h3>
+                        <h2 class="text-4xl tracking-tight leading-10 font-extrabold text-gray-900 sm:text-5xl sm:leading-none md:text-6xl">
+                            We're getting
+                            <br class="xl:hidden">
+                            <span class="text-indigo-600">married!</span>
+                        </h2>
+                        <p x-show="!user"
+                            class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+                            Please log in for information and RSVP.
+                        </p>
+                        <p x-show="user"
+                            class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+                            September 15th, 2020 <span class="text-gray-300">(<span x-text="daysUntil()"></span> days left!)</span> <br> 
+                            <a href="https://g.page/CompassRoseSuites?share" target="_blank">Compass Rose Suites, Prince Edward County</a>
+                        </p>
+                        
+                        <div x-show="user" class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
+                            <div class="rounded-md shadow">
+                                <a href="/rsvp.html"
+                                    class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10">
+                                    RSVP
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
         </div>
-      </div>
+        <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+            <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="img/clink.jpg" alt="">
+        </div>
     </div>
 
-    <div class="section" id="section_rsvp">
-      <div x-show="!user" class="container mx-auto px-4">
-        <p>Please log in</p>
-      </div>
-
-      <div x-show="user" class="container mx-auto px-4 space-y-4">
-
-        <p class="text-xl">RSVP</p>
-
-        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-          <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="guest_name">
-              Name
-            </label>
-            <input x-model="currentGuest.name"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="guest_name" type="text" placeholder="Name">
-          </div>
-
-          <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="staying_over">
-              Staying Over?
-            </label>
-            <input x-model="currentGuest.stayingOver"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="staying_over" type="text" placeholder="How long are you staying?">
-          </div>
-
-          <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="bubble">
-              Who's in your social bubble?
-            </label>
-            <input x-model="currentGuest.bubble"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="bubble" type="text"
-              placeholder="Who are you staying with? Who would you be comfortable seated next to?">
-          </div>
-
-          <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="dietary">
-              Dietary Restrictions?
-            </label>
-            <input x-model="currentGuest.dietary"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="dietary" type="text" placeholder="Veg/non-veg, allergies, GF, etc.">
-          </div>
-
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="wine_select">
-            Wine?
-          </label>
-          <div class="inline-block relative w-64 mb-4">
-            <select id="wine_select" x-model="currentGuest.wine"
-              class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-              <option>None</option>
-              <option>Red</option>
-              <option>White</option>
-              <option>Rose</option>
-            </select>
-            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-              <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
-            </div>
-          </div>
-
-          <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="booze">
-              Other booze?
-            </label>
-            <input x-model="currentGuest.booze"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="booze" type="text" placeholder="None, beer, wine, gin, tequila, etc.">
-          </div>
-
-          <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="notes">
-              Notes?
-            </label>
-            <input x-model="currentGuest.notes"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="notes" type="text" placeholder="We can't wait to see you at our wedding!">
-          </div>
-        </form>
-
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          @click="addGuest($nextTick)" x-on:click.debounce.750>
-          Submit guest
-        </button>
-
-        <p x-show="guests.length > 0" class="text-lg italic">Guests</p>
-
-        <template x-for="guest in guests" :key="guest">
-
-          <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-            <div class="mb-4">
-              <div class="text-gray-900 font-bold text-xl mb-2" x-text="guest.name"></div>
-              <p class="text-gray-700 text-base">Staying over: <span x-text="guest.stayingOver"></span></p>
-              <p class="text-gray-700 text-base">Bubble: <span x-text="guest.bubble"></span></p>
-              <p class="text-gray-700 text-base">Dietary: <span x-text="guest.dietary"></span></p>
-              <p class="text-gray-700 text-base">Wine: <span x-text="guest.wine"></span></p>
-              <p class="text-gray-700 text-base">Booze: <span x-text="guest.booze"></span></p>
-            </div>
-            <button class="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded"
-              @click="deleteGuest(guest, $nextTick)">
-              Delete
-            </button>
-          </div>
-
-        </template>
-
-        <button x-show="guests.length > 0"
-          class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" @click="submit">
-          Submit RSVP
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.9/vendors/scrolloverflow.min.js"
-    integrity="sha512-pYyQWhzi2lV+RM4GmaUA56VPL48oLVvsHmP9tuQ8MaZMDHomVEDjXXnfSVKXayy+wLclKPte0KbsuVoFImtE7w=="
-    crossorigin="anonymous"></script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.9/fullpage.min.js"
-    integrity="sha512-Gx/C4x1qubng2MWpJIxTPuWch9O88dhFFfpIl3WlqH0jPHtCiNdYsmJBFX0q5gIzFHmwkPzzYTlZC/Q7zgbwCw=="
-    crossorigin="anonymous"></script>
-
-  <script type="text/javascript">
-    var myFullpage = new fullpage('#fullpage', {
-      licenseKey: undefined,
-      sectionsColor: ['#f2f2f2', '#4BBFC3', '#7BAABE', 'whitesmoke', '#ccddff'],
-      anchors: ['main', 'logistics', 'rsvp'],
-      menu: '#menu',
-      navigation: true,
-      scrollOverflow: true
-    });
-  </script>
 </body>
 
 </html>
