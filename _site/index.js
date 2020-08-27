@@ -35,6 +35,13 @@ function stuff() {
         },
         guests: [
         ],
+        guestSubmitText() {
+            const count = this.guests.length;
+            if (count === 1)
+                return "1 guest";
+            else
+                return `${count} guests`;
+        },
         currentGuest: {
             name: '',
             stayingOver: '',

@@ -79,6 +79,7 @@ Sydney + Tirth`,
 
 <p>
 <b><u>COVID HOUSEKEEPING:</u></b>
+<br>
 We want our special day to be enjoyable and relaxing for everyone involved
 but we also do not want to forget that we are living in uncertain times and
 getting married during a pandemic.
