@@ -83,7 +83,7 @@ function stuff() {
                 });
             });
 
-            fetch('/.netlify/functions/upsert-guest', {
+            fetch('/.netlify/functions/upsert-guests', {
                 method: 'POST', body: JSON.stringify(guests)
             })
                 .then(res => {
@@ -96,7 +96,7 @@ function stuff() {
         },
         submitted: false,
         downloadCsv() {
-            
+
         }
     }
 }
