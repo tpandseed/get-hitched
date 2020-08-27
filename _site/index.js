@@ -17,6 +17,11 @@ function stuff() {
                 return this.user.user_metadata.full_name;
             return 'everyone';
         },
+        userFirstName() {
+            if (this.user)
+                return this.user.user_metadata.full_name.split(' ')[0];
+            return ''
+        },
         daysUntil() {
             let timeLeft = zeroDay - Date.now();
             let days = timeLeft / (1000 * 3600 * 24)
@@ -93,7 +98,7 @@ function stuff() {
                         this.submitted = true;
 
                         fetch('/.netlify/functions/send-email', {
-                            method: 'POST', body: JSON.stringify({ 'name': this.userDisplay(), 'email': this.user.email })
+                            method: 'POST', body: JSON.stringify({ 'name': this.userFirstName(), 'email': this.user.email })
                         })
                             .then(res => {
                                 if (!res.ok){
