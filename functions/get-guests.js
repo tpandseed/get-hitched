@@ -14,11 +14,13 @@ exports.handler = async (event, context) => {
     try {
         let query = client.query(
             q.Paginate(q.Match(q.Index('names')))
-          )
+          );
+
+        console.log(query);
 
         return {
             statusCode: 200,
-            body: query
+            body: 'hey'
         };
     } catch (error) {
         return {
