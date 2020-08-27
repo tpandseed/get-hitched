@@ -12,7 +12,7 @@ exports.handler = async (event, context) => {
     console.log(`Function 'get-guests' invoked`);
 
     try {
-        let query = client.query(
+        let query = await client.query(
             q.Paginate(q.Match(q.Index('names')))
           );
 
