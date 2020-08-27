@@ -91,6 +91,15 @@ function stuff() {
                         console.error("couldn't save guests");
                     } else {
                         this.submitted = true;
+
+                        fetch('/.netlify/functions/send-email', {
+                            method: 'POST', body: JSON.stringify({ 'name': this.userDisplay(), 'email': this.user.email })
+                        })
+                            .then(res => {
+                                if (!res.ok){
+                                    console.error("couldn't send email");
+                                }
+                            })
                     }
                 });
         },
