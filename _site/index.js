@@ -71,6 +71,7 @@ function stuff() {
 
                 fetch('/.netlify/functions/upsert-guest', {
                     method: 'POST', body: JSON.stringify({
+                        creator_email: this.user.email,
                         name: guest.name,
                         stayingOver: guest.stayingOver,
                         bubble: guest.bubble,

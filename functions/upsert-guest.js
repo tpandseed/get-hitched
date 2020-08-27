@@ -19,9 +19,20 @@ exports.handler = async (event, context) => {
 
     console.log(`Function 'upsert-guest' invoked for ${name}`);
 
-    let query = await client.query(q.Get(
-        q.Match(q.Index('name'), name)
-    ));
+    let query = await client.query(
+        q.If(
+            q.Exists(q.Match(q.Index('name'), name)),
+            q.Replace(
+                q.Select('ref', q.Get(q.Match(q.Index('name'), name))),
+                {
+                    data
+                }
+            ),
+            q.Create(q.Collection('guests'), {
+                data
+            })
+        )
+    );
 
     console.log(query);
 
