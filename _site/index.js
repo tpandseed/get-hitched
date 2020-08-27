@@ -67,27 +67,36 @@ function stuff() {
             this.guests = this.guests.filter(g => g !== guest);
         },
         submit() {
+
+            const guests = [];
+
             this.guests.forEach(guest => {
-
-                fetch('/.netlify/functions/upsert-guest', {
-                    method: 'POST', body: JSON.stringify({
-                        creator_email: this.user.email,
-                        name: guest.name,
-                        stayingOver: guest.stayingOver,
-                        bubble: guest.bubble,
-                        dietary: guest.dietary,
-                        wine: guest.wine,
-                        booze: guest.booze,
-                        notes: guest.notes
-                    })
-                })
-                    .then(res => {
-                        if (!res.ok) {
-                            console.error("couldn't save guest");
-                        }
-                    });
-
+                guests.push({
+                    creator_email: this.user.email,
+                    name: guest.name,
+                    stayingOver: guest.stayingOver,
+                    bubble: guest.bubble,
+                    dietary: guest.dietary,
+                    wine: guest.wine,
+                    booze: guest.booze,
+                    notes: guest.notes
+                });
             });
+
+            fetch('/.netlify/functions/upsert-guest', {
+                method: 'POST', body: JSON.stringify(guests)
+            })
+                .then(res => {
+                    if (!res.ok) {
+                        console.error("couldn't save guests");
+                    } else {
+                        this.submitted = true;
+                    }
+                });
+        },
+        submitted: false,
+        downloadCsv() {
+            
         }
     }
 }
