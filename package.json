@@ -12,6 +12,7 @@
     "@tailwindcss/ui": "^0.5.0"
   },
   "dependencies": {
+    "csv-stringify": "^5.5.1",
     "faunadb": "^3.0.1",
     "nodemailer": "^6.4.11"
   }

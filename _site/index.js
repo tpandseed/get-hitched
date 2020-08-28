@@ -113,7 +113,7 @@ function stuff() {
                             method: 'POST', body: JSON.stringify({ 'name': this.userFirstName(), 'email': this.user.email })
                         })
                             .then(res => {
-                                if (!res.ok){
+                                if (!res.ok) {
                                     console.error("couldn't send email");
                                 }
                             })
@@ -127,11 +127,16 @@ function stuff() {
                 method: 'POST', body: ''
             })
                 .then(res => {
-                    if (!res.ok){
+                    if (!res.ok) {
                         console.error("couldn't get all data");
                     } else {
-                        res.json().then(data => {
+                        res.text().then(data => {
                             console.log(data);
+
+                            var blob = new Blob([data], {
+                                type: "text/plain;charset=utf-8"
+                            });
+                            saveAs(blob, "guests.csv");
                         })
                     }
                 })
