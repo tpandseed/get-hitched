@@ -9,6 +9,10 @@ netlifyIdentity.on('init', u => userEvent(u));
 netlifyIdentity.on('login', u => userEvent(u));
 netlifyIdentity.on('logout', u => userEvent(u));
 
+function calcDays() {
+    return ((zeroDay - Date.now()) / (1000 * 3600 * 24));
+}
+
 function stuff() {
     return {
         user: null,
@@ -22,10 +26,11 @@ function stuff() {
                 return this.user.user_metadata.full_name.split(' ')[0];
             return ''
         },
-        daysUntil() {
-            let timeLeft = zeroDay - Date.now();
-            let days = timeLeft / (1000 * 3600 * 24)
-            return days.toString();
+        daysUntil: calcDays().toString(),
+        dayTimer() {
+            setInterval(() => {
+                this.daysUntil = calcDays().toString();
+            }, 1000);
         },
         setUser(userInfo) {
             this.user = userInfo;

@@ -17,7 +17,7 @@
     <script src="./index.js"></script>
 </head>
 
-<body x-data="stuff()" @user-login.window="setUser($event.detail)">
+<body x-data="stuff()" @user-login.window="setUser($event.detail)" x-init='() => { dayTimer() }'>
 
     <div class="relative bg-white overflow-hidden">
         <div class="max-w-screen-xl mx-auto">
@@ -46,7 +46,7 @@
                         </p>
                         <p x-show="user"
                             class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                            September 15th, 2020 <span class="text-gray-300">(<span x-text="daysUntil()"></span> days left!)</span> <br> 
+                            September 15th, 2020 <span class="text-gray-300">(<span x-text="daysUntil"></span> days left!)</span> <br> 
                             <a href="https://g.page/CompassRoseSuites?share" target="_blank">Compass Rose Suites, Prince Edward County</a>
                         </p>
                         
