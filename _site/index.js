@@ -10,7 +10,7 @@ netlifyIdentity.on('login', u => userEvent(u));
 netlifyIdentity.on('logout', u => userEvent(u));
 
 function calcDays() {
-    return ((zeroDay - Date.now()) / (1000 * 3600 * 24));
+    return ((Date.now() - zeroDay) / (1000 * 3600 * 24));
 }
 
 function stuff() {
