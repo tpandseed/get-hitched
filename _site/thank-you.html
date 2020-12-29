@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Syd + Tirth - Thanks!</title>
+    <meta name="description" content="Syd and Tirth got hitched!">
+
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
+
+    <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script src="./thank-you.js"></script>
+</head>
+
+<body x-data="thankYouContext()" @user-login.window="setUser($event.detail)" x-init="initFunc()">
+
+    <header class="bg-gray-100 shadow">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <div x-show="!user" class="container mx-auto px-4">
+                <a class="text-3xl font-bold leading-tight text-gray-900" href="/">
+                    Please log in
+                </a>
+            </div>
+            <div x-show="user" class="container mx-auto px-4">
+                <a class="text-3xl font-bold leading-tight text-gray-900" href="/">
+                    A very special thank you for <span x-text="userFirstName()"></span>
+                </a>
+                <p x-show="userDisplay() === 'Tirth' || userDisplay() === 'Sydney Shapansky'">Hi Speedo! 🥰</p>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+            <template x-if="user">
+                <div class="container mx-auto px-4 space-y-4">
+
+                    <p><span x-text="thanksMessage"></span></p>
+
+                    <div>
+                        <script src="./album.js" async></script>
+                        <div class="pa-gallery-player-widget" style="width:100%; height:480px; display:none;"
+                            data-link="https://photos.app.goo.gl/oHWsn4tma4LVwUDm8" x-bind:data-title="`Pix for ${userFirstName()}`"
+                            data-description="Syd and Tirth getting married" data-delay="2">
+                            <object
+                                data="https://lh3.googleusercontent.com/8wLRB5AivQFXqGKQ1mcaqpXTMCCgft_AJLcvbgTbFDQZNuYdED7T3PZAI3BzmDOQZNJpwIuI_GptlqK3x5IkPx8u20wspz1gtNPlswmjja0-GoGHuPpw18QIdBJKuOpU5dim-V37FRg=w1920-h1080"></object>
+                            <object
+                                data="https://lh3.googleusercontent.com/XGg9wA0QVDyDfeW3n3P9eWHT0G0ORdBSnR28a-AwV14Y_tkfvQrKNoxU9kAZNX3LkqIMTF15vh4sGQSPvTxBgp3R3KMjUhHCI8Lcmzc7iX9z3XYj0QC-XWbk_H3cR6ODMaKdZjPNTxQ=w1920-h1080"></object>
+                            <object
+                                data="https://lh3.googleusercontent.com/jiq7BddWR_epI6GcFqSJAbhBZgw8h8sGuDmhoNBCFj9YAiFETknLYN_BcB-Mrh20QmrLgS0MaUi1OC2yGdhNEjr-FsaGXMNtIyT2D1Ac8wPWa56I8o0Mit1seNjffqmFJiuBgsZ2VyQ=w1920-h1080"></object>
+                            <object
+                                data="https://lh3.googleusercontent.com/mIFWvTSiiOtZv0uqJxUz28Gd4yXi45NNua5irJz1c_udjakI2SUck-g4j0kJSvBunTJOzfoTmkqY4u8acohUvWc8AAyoQYoE1P5W1qI8FRZVk2twD26A6wZ2ywSSXIax78lcXS4LBUs=w1920-h1080"></object>
+                        </div>
+                    </div>
+                   
+                </div>
+            </template>
+        </div>
+    </main>
+</body>
+
+</html>
