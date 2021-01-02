@@ -28,6 +28,7 @@ const client = new faunadb.Client({
 const q = faunadb.query;
 const handler = async function (event, context) {
     // console.log(event, context);
+    var _a;
     if (event.httpMethod !== 'POST') {
         return {
             statusCode: 401,
@@ -41,7 +42,17 @@ const handler = async function (event, context) {
             body: "Must have user"
         };
     }
-    let query = await client.query(q.Get(q.Match(q.Index("thanks_people"), "Tirth")));
+    const emailInfo = JSON.parse((_a = event.body) !== null && _a !== void 0 ? _a : "{}");
+    let query;
+    try {
+        query = await client.query(q.Get(q.Match(q.Index("thanks_email"), emailInfo.email)));
+    }
+    catch (error) {
+        return {
+            statusCode: 500,
+            body: `Error getting message: ${error}`
+        };
+    }
     if (!query.data) {
         return {
             statusCode: 500,
@@ -51,7 +62,7 @@ const handler = async function (event, context) {
     console.log(query);
     return {
         statusCode: 200,
-        body: query.data.message
+        body: JSON.stringify(query.data)
     };
 };
 exports.handler = handler;

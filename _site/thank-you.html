@@ -13,11 +13,11 @@
 
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
 
-    <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script type="text/javascript" src="./netlify-identity-widget.js"></script>
     <script src="./thank-you.js"></script>
 </head>
 
-<body x-data="thankYouContext()" @user-login.window="setUser($event.detail)" x-init="initFunc()">
+<body x-data="thankYouContext()" @user-login.window="setUser($event.detail)">
 
     <header class="bg-gray-100 shadow">
         <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
@@ -28,7 +28,7 @@
             </div>
             <div x-show="user" class="container mx-auto px-4">
                 <a class="text-3xl font-bold leading-tight text-gray-900" href="/">
-                    A very special thank you for <span x-text="userFirstName()"></span>
+                    A very special thank you for <span x-text="userSpecifiedName"></span>
                 </a>
                 <p x-show="userDisplay() === 'Tirth' || userDisplay() === 'Sydney Shapansky'">Hi Speedo! 🥰</p>
             </div>
@@ -36,16 +36,20 @@
     </header>
     <main>
         <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-            <template x-if="user">
+            <template x-if="userSpecifiedName">
                 <div class="container mx-auto px-4 space-y-4">
 
                     <p><span x-text="thanksMessage"></span></p>
 
+                    <br>
+                    <p class="font-bold text-xl">All our love,</p>
+                    <p class="font-bold text-xl" style="margin-top: 0;">Syd + Tirth</p>
+
                     <div>
                         <script src="./album.js" async></script>
-                        <div class="pa-gallery-player-widget" style="width:100%; height:480px; display:none;"
-                            data-link="https://photos.app.goo.gl/oHWsn4tma4LVwUDm8" x-bind:data-title="`Pix for ${userFirstName()}`"
-                            data-description="Syd and Tirth getting married" data-delay="2">
+                        <div class="pa-carousel-widget" style="width:100%; height:480px; display:none;"
+                            x-bind:data-title="`Pix for ${userSpecifiedName}`"
+                            data-description="Syd and Tirth getting married" data-delay="7">
                             <object
                                 data="https://lh3.googleusercontent.com/8wLRB5AivQFXqGKQ1mcaqpXTMCCgft_AJLcvbgTbFDQZNuYdED7T3PZAI3BzmDOQZNJpwIuI_GptlqK3x5IkPx8u20wspz1gtNPlswmjja0-GoGHuPpw18QIdBJKuOpU5dim-V37FRg=w1920-h1080"></object>
                             <object

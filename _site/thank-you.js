@@ -10,8 +10,19 @@ netlifyIdentity.on('logout', u => userEvent(u));
 function thankYouContext() {
     return {
         user: null,
-        setUser(userInfo) {
+        thanksMessage: "Thanks!",
+        userSpecifiedName: null,
+        async setUser(userInfo) {
+            if (this.user)
+                return;
+
             this.user = userInfo;
+
+            const thankYouInfo = await this.getThanks();
+            if (thankYouInfo) {
+                this.userSpecifiedName = thankYouInfo.name;
+                this.thanksMessage = thankYouInfo.message[0];
+            }
         },
         userDisplay() {
             if (this.user)
@@ -23,17 +34,18 @@ function thankYouContext() {
                 return this.user.user_metadata.full_name.split(' ')[0];
             return ''
         },
-        thanksMessage: "Thanks!",
-        async initFunc() {
-            console.log('yoyo');
-
+        async getThanks() {
             const res = await fetch('/api/get-thanks', {
-                method: 'POST'
+                method: 'POST', body: JSON.stringify({ 'email': this.user.email })
             });
 
             if (res.ok) {
-                const text = await res.text();
-                this.thanksMessage = text;
+                const thankYouInfo = await res.json();
+                return thankYouInfo;
+            }
+            else {
+                const error = await res.text();
+                console.warn(`error getting thanks: ${error}`);
             }
         }
     }

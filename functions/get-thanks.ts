@@ -26,11 +26,21 @@ export const handler = async function (event: APIGatewayProxyEvent, context: any
         }
     }
 
-    let query: any = await client.query(
-        q.Get(
-            q.Match(q.Index("thanks_people"), "Tirth")
-        )
-    );
+    const emailInfo = JSON.parse(event.body ?? "{}");
+
+    let query: any;
+    try {
+        query = await client.query(
+            q.Get(
+                q.Match(q.Index("thanks_email"), emailInfo.email)
+            )
+        );   
+    } catch (error) {
+        return {
+            statusCode: 500,
+            body: `Error getting message: ${error}`
+        };
+    }
 
     if (!query.data) {
         return {
@@ -43,6 +53,6 @@ export const handler = async function (event: APIGatewayProxyEvent, context: any
 
     return {
         statusCode: 200,
-        body: query.data.message
+        body: JSON.stringify(query.data)
     };
 };
